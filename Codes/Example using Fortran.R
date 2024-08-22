@@ -2,7 +2,7 @@ rm(list = ls())
 cat("\014")
 
 # Load the shared library
-dyn.load("D:\\Ts2Vg\\tsvg.so")
+dyn.load("tsvg.so")
 
 # Sample time series data
 time_series <- rnorm(1024)
