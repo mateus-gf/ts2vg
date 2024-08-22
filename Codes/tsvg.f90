@@ -27,8 +27,8 @@
 !   called from R using the .Fortran interface.
 !
 ! Author: Mateus Gonzalez de Freitas Pinto (2024)
-!
-!Please cite the originals!
+! Adapted from original .f90 code of Lucas Lacasa to be callable from R
+! Please cite the originals!
 !
 ![1] From time series to complex networks: the visibility graph
 !Lucas Lacasa, Bartolo Luque, Fernando Ballesteros, Jordi Luque, Juan C. Nuño
@@ -49,7 +49,7 @@ subroutine ComputeVGAndDegreeDistribution(N, TimeSeries, VG, DegreeDistribution,
     integer, dimension(N), intent(out) :: DegreeDistribution, InDegreeDistribution, OutDegreeDistribution
 
     integer :: i, j
-    double precision :: criterio, pendiente
+    double precision :: criteria, pending
 
     ! Initialize VG and degree distribution arrays
     VG = 0
@@ -59,11 +59,11 @@ subroutine ComputeVGAndDegreeDistribution(N, TimeSeries, VG, DegreeDistribution,
 
     do i = 1, N - 1
         do j = i + 1, N
-            criterio = TimeSeries(j) - TimeSeries(i)
-            pendiente = (TimeSeries(j) - TimeSeries(i)) / (j - i)
+            criteria = TimeSeries(j) - TimeSeries(i)
+            pending = (TimeSeries(j) - TimeSeries(i)) / (j - i)
             
             ! Check the criteria and update VG and degree distributions
-            if (criterio <= pendiente) then
+            if (criteria <= pending) then
                 VG(i, j) = 1
                 VG(j, i) = 1
                 DegreeDistribution(i) = DegreeDistribution(i) + 1
@@ -72,5 +72,3 @@ subroutine ComputeVGAndDegreeDistribution(N, TimeSeries, VG, DegreeDistribution,
                 InDegreeDistribution(j) = InDegreeDistribution(j) + 1
             end if
         end do
-    end do
-end subroutine
