@@ -26,7 +26,7 @@
 ! - This subroutine should be compiled into a shared library and can be
 !   called from R using the .Fortran interface.
 !
-! Author: Mateus Gonzalez de Freitas Pinto (2023)
+! Author: Mateus Gonzalez de Freitas Pinto (2024)
 !
 !Please cite the originals!
 !
